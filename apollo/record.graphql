@@ -1,0 +1,8 @@
+query record {
+  allScores (orderBy: total_DESC, first:1){
+    total
+    player {
+    nickName
+    }
+  }
+}

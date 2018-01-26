@@ -1,0 +1,5 @@
+mutation createScore ($ace: Int!, $two: Int!, $three: Int!, $four: Int!, $five: Int!, $six: Int!, $totalTop: Int!, $lowest: Int!, $highest: Int!, $totalDiff: Int!, $smallStraight: Int!, $highStraight: Int!, $totalStraights: Int!, $threeOfAKind: Int!, $fullHouse: Int!, $fourOfAKind: Int!, $yams:Int!, $bonusYams: Int!, $yamsSec: Int!, $totalBottom: Int!, $total: Int!, $winner: Boolean!, $playerId:ID!, $gameId: ID!) {
+  createScore(ace: $ace, two: $two, three: $three, four: $four, five: $five, six: $six, totalTop: $totalTop, lowest: $lowest, highest: $highest, totalDiff: $totalDiff, smallStraight: $smallStraight, highStraight: $highStraight, totalStraights: $totalStraights, threeOfAKind: $threeOfAKind, fullHouse: $fullHouse, fourOfAKind: $fourOfAKind, yams: $yams, bonusYams: $bonusYams, yamsSec: $yamsSec, totalBottom: $totalBottom, total: $total, winner: $winner, playerId: $playerId, gameId: $gameId) {
+    id
+  }
+}

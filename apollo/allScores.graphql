@@ -1,0 +1,29 @@
+query allScores {
+  allScores {
+    player {
+      nickName
+    },
+    ace,
+    two,
+    three,
+    four,
+    five,
+    six,
+    totalTop,
+    lowest,
+    highest,
+    totalDiff,
+    smallStraight,
+    highStraight,
+    totalStraights,
+    threeOfAKind,
+    fullHouse,
+    fourOfAKind,
+    yams,
+    bonusYams,
+    yamsSec,
+    totalBottom,
+    total,
+    winner
+  }
+}

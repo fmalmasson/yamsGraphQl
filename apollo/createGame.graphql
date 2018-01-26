@@ -1,0 +1,5 @@
+mutation createGame ($playing: Int!, $playersIds:[ID!]) {
+  createGame(playing:$playing, playersIds:$playersIds) {
+    id
+  }
+}

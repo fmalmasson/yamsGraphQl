@@ -1,0 +1,6 @@
+query allPlayers {
+  allPlayers {
+    id,
+    nickName
+  }
+}
