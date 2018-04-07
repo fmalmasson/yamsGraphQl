@@ -49,7 +49,11 @@ const createStore = () => {
                   bonusYams: 0,
                   yamsSec: 0
                 },
-                total: null
+                total: null,
+                totalTop: null,
+                totalDiff: null,
+                totalStraights: null,
+                totalBottom: null
               }
             }
           )

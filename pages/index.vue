@@ -47,7 +47,7 @@ export default {
 <style lang="scss">
 .code {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   position: relative;
   height: 90%;
   &__actions {

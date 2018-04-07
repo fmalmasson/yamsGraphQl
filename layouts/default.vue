@@ -4,27 +4,32 @@
       <router-link class="header__logo" to="/">
         <span>Yams</span>
       </router-link>
+      <span class="spacer"></span>
+
+      <v-flex xs3 sm3>
+      <v-select v-if="allPlayers"
+            style="{ background-color: blue }"
+            content-class="select-dropdown"
+            label="Joueurs"
+            v-bind:items="allPlayers"
+            v-model="playing"
+            item-text="nickName"
+            multiple
+            @change="reset"
+          ></v-select>
+          </v-flex>
       <div class="header__menu">
-        <v-flex xs12 sm6>
-        <v-select v-if="allPlayers"
-              content-class="select-dropdown"
-              label="Joueurs"
-              v-bind:items="allPlayers"
-              v-model="playing"
-              item-text="nickName"
-              multiple
-              hint="selection des joueurs"
-              @change="reset"
-            ></v-select>
-            </v-flex>
+
         <div class="link" @click="startGame">
-          Start
+          Jouer
         </div>
+        <span class="spacer"></span>
+
         <div class="link" @click="nextGame">
           Partie suivante
         </div>
         <div class="link" @click="reload">
-          Charger partie en cours
+          Charger partie
         </div>
         <router-link class="link" :to="{ name: 'createPlayer' }" exact>
           Créer joueur
@@ -33,9 +38,16 @@
         <router-link class="link" :to="{ name: 'stats' }" exact>
           Stats
         </router-link>
-        <a class="link" href="https://vuejs.org">
-          <v-icon>settings</v-icon>
-        </a>
+        <v-menu bottom left>
+           <v-btn icon slot="activator" dark>
+             <v-icon>settings</v-icon>
+           </v-btn>
+           <v-list>
+             <v-list-tile v-for="item in items" :key="item.title" @click="">
+               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+             </v-list-tile>
+           </v-list>
+         </v-menu>
       </div>
     </div>
 
@@ -64,6 +76,12 @@ export default {
     Search
   },
   data: () => ({
+    items: [
+      { title: 'Click Me' },
+      { title: 'Click Me' },
+      { title: 'Click Me' },
+      { title: 'Click Me 2' }
+    ],
     playing: [],
     winner: '',
     gameId: ''
@@ -112,22 +130,22 @@ export default {
             four: player.score.top.four,
             five: player.score.top.five,
             six: player.score.top.six,
-            totalTop: 50,
+            totalTop: player.totalTop,
             lowest: player.score.diff.lowest,
             highest: player.score.diff.highest,
-            totalDiff: 25,
+            totalDiff: player.totalDiff,
             smallStraight: player.score.straights.small,
             highStraight: player.score.straights.high,
-            totalStraights: 100,
+            totalStraights: player.totalDiff,
             threeOfAKind: player.score.bottom.threeOfAKind,
             fullHouse: player.score.bottom.fullHouse,
             fourOfAKind: player.score.bottom.fourOfAKind,
             yams: player.score.bottom.yams,
             bonusYams: player.score.bottom.bonusYams,
             yamsSec: player.score.bottom.yamsSec,
-            totalBottom: 245,
-            total: 500,
-            winner: true,
+            totalBottom: player.totalBottom,
+            total: player.score.total,
+            winner: false,
             playerId: player.id,
             gameId: this.gameId
           }
@@ -167,7 +185,11 @@ export default {
                 bonusYams: 0,
                 yamsSec: 0
               },
-              total: null
+              total: null,
+              totalTop: null,
+              totalDiff: null,
+              totalStraights: null,
+              totalBottom: null
             }
           }
         )
@@ -212,6 +234,7 @@ export default {
         this.players.unshift(newOrder[i])
       }
       this.setPlayers()
+      this.createGame()
     },
     reload () {
       this.reset()
@@ -234,8 +257,10 @@ export default {
 
 <style lang="scss">
 @import 'assets/variables.scss';
-.select-dropdown {
-  top: 80px;
+.menu__content {
+  background-color: red;
+  top:60px;
+  left: 0px;
 }
 .main {
   background-image: url('https://images.alphacoders.com/257/257863.jpg');
@@ -261,11 +286,13 @@ export default {
   padding: 10px 16px;
   position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
   z-index: 2;
   border-bottom: 1px solid #eee;
   &__menu {
     display: flex;
+    justify-content: center;
     align-items: center;
     margin-left: auto;
     .spacer {

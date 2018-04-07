@@ -238,6 +238,7 @@ export default {
       if (total >= 63) {
         total += 50
       }
+      this.player.totalTop = total
       return total
     },
     totalDiff () {
@@ -249,6 +250,8 @@ export default {
       } else {
         total = Number(Number(this.player.score.diff.highest)) - Number(this.player.score.diff.lowest) + 20
       }
+      this.player.totalDiff = total
+
       return total
     },
     totalSuite () {
@@ -256,6 +259,8 @@ export default {
       if (total >= 70) {
         total += 30
       }
+      this.player.totalStraights = total
+
       return total
     },
     totalBottom () {
@@ -264,6 +269,8 @@ export default {
         values.push(Number(score))
       })
       let total = _.reduce(values, (sum, v) => (sum + v))
+      this.player.totalBottom = total
+
       return total
     },
     total () {
