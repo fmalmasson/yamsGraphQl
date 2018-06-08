@@ -16,6 +16,8 @@
     :search="search"
     :headers="headers"
     :items="allScores"
+    :rows-per-page-items="rowsPerPageItems"
+    :pagination.sync="pagination"
     class="text-xs-left scroll elevation-1 scroll-x"
   >
   <template slot="items" scope="props">
@@ -40,7 +42,7 @@
     <td class="text-xs-left">{{ props.item.yams }}</td>
     <td class="text-xs-left">{{ props.item.bonusYams }}</td>
     <td class="text-xs-left">{{ props.item.yamsSec }}</td>
-    <td class="last-td text-xs-left">{{ props.item.winner }}</td>
+    <!-- <td class="last-td text-xs-left">{{ props.item.winner ? 'oui' : 'non' }}</td> -->
   </template>
 </v-data-table>
 
@@ -59,37 +61,38 @@ export default {
   },
   data: () => ({
     record: '',
+    rowsPerPageItems: [10, 20, 30, 50, 200],
     pagination: {
-      sortBy: 'total'
+      rowsPerPage: 20
     },
     search: '',
     headers: [
       {
         text: 'Joueur',
         sortable: false,
-        value: 'allScores.player.nickName'
+        value: 'player.nickName'
       },
-      { text: 'Total', value: 'allScores.total', align: 'left' },
-      { text: 'Les 1', value: 'allScores.ace', align: 'left' },
-      { text: 'Les 2', value: 'allScores.two', align: 'left' },
-      { text: 'Les 3', value: 'allScores.three', align: 'left' },
-      { text: 'Les 4', value: 'allScores.four', align: 'left' },
+      { text: 'Total', value: 'total', align: 'left' },
+      { text: 'Les 1', value: 'ace', align: 'left' },
+      { text: 'Les 2', value: 'two', align: 'left' },
+      { text: 'Les 3', value: 'three', align: 'left' },
+      { text: 'Les 4', value: 'four', align: 'left' },
       { text: 'Les 5', value: 'score.top.five', align: 'left' },
-      { text: 'Les 6', value: 'allScores.six', align: 'left' },
-      { text: 'Total haut', value: 'allScores.totalTop', align: 'left' },
-      { text: 'moins', value: 'allScores.lowest', align: 'left' },
-      { text: 'plus', value: 'allScores.highest', align: 'left' },
-      { text: 'Total diff', value: 'allScores.totalDiff', align: 'left' },
-      { text: 'Petite Suite', value: 'allScores.smallStraight', align: 'left' },
-      { text: 'Grande Suite', value: 'allScores.highStraight', align: 'left' },
-      { text: 'Total suites', value: 'allScores.totalStraights', align: 'left' },
-      { text: 'Brelan', value: 'allScores.threeOfAKind', align: 'left' },
-      { text: 'Full', value: 'allScores.fullHouse', align: 'left' },
-      { text: 'Carré', value: 'allScores.fourOfAKind', align: 'left' },
-      { text: 'Yams', value: 'allScores.yams', align: 'left' },
-      { text: 'Bonus Yams', value: 'allScores.bonusYams', align: 'left' },
-      { text: 'Yams Sec', value: 'allScores.yamsSec', align: 'left' },
-      { text: 'Winner', value: 'allScores.winner', align: 'left' }
+      { text: 'Les 6', value: 'six', align: 'left' },
+      { text: 'Total haut', value: 'totalTop', align: 'left' },
+      { text: 'moins', value: 'lowest', align: 'left' },
+      { text: 'plus', value: 'highest', align: 'left' },
+      { text: 'Total diff', value: 'totalDiff', align: 'left' },
+      { text: 'Petite Suite', value: 'smallStraight', align: 'left' },
+      { text: 'Grande Suite', value: 'highStraight', align: 'left' },
+      { text: 'Total suites', value: 'totalStraights', align: 'left' },
+      { text: 'Brelan', value: 'threeOfAKind', align: 'left' },
+      { text: 'Full', value: 'fullHouse', align: 'left' },
+      { text: 'Carré', value: 'fourOfAKind', align: 'left' },
+      { text: 'Yams', value: 'yams', align: 'left' },
+      { text: 'Bonus Yams', value: 'bonusYams', align: 'left' },
+      { text: 'Yams Sec', value: 'yamsSec', align: 'left' }
+      // { text: 'Gagnant', value: 'winner', align: 'left' }
     ]
   }),
   methods: {
